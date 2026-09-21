@@ -1,0 +1,39 @@
+% Prueba de inserción del logo reconstruido en un documento "real" (no
+% standalone) — verifica que assets/tikz/logo_uam_reconstruido.pdf se
+% incrusta correctamente vía \includegraphics, a tamaño reducido, y que
+% compila con pdflatex (no requiere xelatex/fontspec: al incluirse ya
+% compilado, el PDF no depende de las fuentes del documento que lo usa).
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage[margin=2.5cm]{geometry}
+
+\begin{document}
+
+\begin{center}
+  \includegraphics[width=5cm]{logo_uam_reconstruido.pdf}
+\end{center}
+
+\vspace{1cm}
+
+\noindent
+Documento de prueba para verificar que el logo institucional reconstruido
+(\texttt{assets/tikz/logo\_uam\_reconstruido.pdf}) se incrusta
+correctamente a tamaño reducido (5\,cm de ancho) dentro de un documento
+LaTeX normal, sin depender de \texttt{xelatex} ni de las fuentes usadas
+para generarlo. Si el emblema conserva sus bordes nítidos y el texto
+``Casa abierta al tiempo / UNIVERSIDAD AUTÓNOMA METROPOLITANA /
+Azcapotzalco'' se lee con claridad a este tamaño, la inserción es
+correcta.
+
+\vspace{1cm}
+
+\noindent
+A modo de comparación, el mismo logo a un tamaño mayor (10\,cm):
+
+\begin{center}
+  \includegraphics[width=10cm]{logo_uam_reconstruido.pdf}
+\end{center}
+
+\end{document}

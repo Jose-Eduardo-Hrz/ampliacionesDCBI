@@ -1,0 +1,7 @@
+allowBuilds:
+  '@prisma/engines': true
+  better-sqlite3: true
+  esbuild: true
+  msgpackr-extract: false
+  prisma: true
+  workerd: false

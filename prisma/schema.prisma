@@ -1,0 +1,110 @@
+// Prisma schema - Sistema de solicitudes de ampliacion de cupo UAM Azcapotzalco
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/lib/server/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// --- Enums ---
+
+enum EstadoAlumno {
+  Registrado
+  EnEspera @map("En espera")
+}
+
+enum DiaSemana {
+  Lunes
+  Martes
+  Miercoles @map("Miércoles")
+  Jueves
+  Viernes
+  Sabado @map("Sábado")
+}
+
+// Pendiente no forma parte de la especificacion original de negocio: se agrego
+// como valor inicial de una Ampliacion recien creada, antes de que un
+// administrador emita una decision. Decision confirmada con el usuario.
+enum EstadoAmpliacion {
+  Pendiente
+  Autorizado
+  NoAutorizado @map("No Autorizado")
+  PasarOficinaEnlace @map("Pasar a la oficina de enlace")
+}
+
+enum SolicitudAmpliacion {
+  Aceptar
+  Rechazar
+}
+
+// --- Modelos ---
+
+model Administrador {
+  numeroEconomico String @id
+  nombre          String
+  password        String // hash seguro, nunca texto plano
+}
+
+model Alumno {
+  matricula String       @id
+  nombre    String
+  correo    String?
+  telefono  String?
+  estado    EstadoAlumno @default(EnEspera)
+
+  ampliaciones Ampliacion[]
+}
+
+// Nombrado "Uea" (no "UEA") por ergonomia del cliente Prisma generado
+// (prisma.uea.*, en vez de prisma.uEA.*). No cambia el significado de negocio.
+model Uea {
+  id     Int    @id @default(autoincrement())
+  clave  String
+  nombre String
+  grupo  String
+
+  horarios     Horario[]
+  ampliaciones Ampliacion[]
+
+  @@unique([clave, grupo])
+}
+
+model Horario {
+  id     Int       @id @default(autoincrement())
+  idUea  Int
+  dia    DiaSemana
+  inicio String
+  fin    String
+
+  uea Uea @relation(fields: [idUea], references: [id])
+
+  @@unique([idUea, dia, inicio, fin])
+}
+
+// Configuracion unica y centralizada del periodo en que / y /registro
+// permiten a un alumno iniciar/completar su registro (fila fija id=1: nunca
+// se crea una segunda, guardar siempre actualiza esta misma). inicio/fin se
+// interpretan en la hora local del proceso de Node que corre el servidor
+// (no hay zona horaria explicita en el proyecto; ver
+// src/lib/server/flujo/periodoRegistro.ts).
+model ConfiguracionRegistro {
+  id     Int      @id @default(1)
+  inicio DateTime
+  fin    DateTime
+}
+
+model Ampliacion {
+  id        Int                  @id @default(autoincrement())
+  matricula String
+  idUea     Int
+  estado    EstadoAmpliacion     @default(Pendiente)
+  solicitud SolicitudAmpliacion?
+
+  alumno Alumno @relation(fields: [matricula], references: [matricula])
+  uea    Uea    @relation(fields: [idUea], references: [id])
+
+  @@unique([matricula, idUea])
+}

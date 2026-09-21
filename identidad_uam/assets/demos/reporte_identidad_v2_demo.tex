@@ -1,0 +1,329 @@
+% ============================================================
+%  reporte_identidad_v2_demo.tex
+%  Prototipo — nueva identidad de encabezados de sección y de
+%  presentación de datos para reportes institucionales UAM-A.
+%
+%  PROPUESTA, NO APLICADA. No sustituye ~06_reporte_v2.tex ni
+%  ninguna plantilla en producción hasta aprobación explícita
+%  de César.
+%
+%  Compilar con:  xelatex reporte_identidad_v2_demo.tex
+%  (requiere Helvetica Neue vía fontspec — no compila con pdflatex)
+% ============================================================
+\documentclass[11pt,a4paper]{article}
+
+%───────────────────────────────────────────────────────────
+%  Idioma y codificación (xelatex maneja UTF-8 nativamente)
+%───────────────────────────────────────────────────────────
+\usepackage[spanish,mexico]{babel}
+\decimalpoint
+\unaccentedoperators % evita el choque babel-spanish / xebabel en \caption (ver 06_reporte_v2.tex)
+
+\usepackage{geometry}
+\geometry{margin=2.5cm, top=3cm, bottom=3cm}
+
+%───────────────────────────────────────────────────────────
+%  Tipografía institucional — Helvetica Neue, única familia
+%  permitida para material primario (Acuerdo 06/2012, §4.1).
+%───────────────────────────────────────────────────────────
+\usepackage{fontspec}
+%% Caras por nombre PostScript. La forma "Helvetica Neue:style=..." enruta por
+%% el camino AAT de XeTeX, falla con `Unknown feature style=.../AAT' y cae en
+%% silencio a la cara redonda: sin negrita, sin cursiva. Verificado con pdffonts.
+\setmainfont{HelveticaNeue}[
+  BoldFont       = {HelveticaNeue-Bold},
+  ItalicFont     = {HelveticaNeue-Italic},
+  BoldItalicFont = {HelveticaNeue-BoldItalic}
+]
+\renewcommand{\familydefault}{\rmdefault}
+\usepackage{microtype}   % también provee \textls (letterspacing) para los rótulos
+
+%───────────────────────────────────────────────────────────
+%  Matemáticas, tablas, figuras
+%───────────────────────────────────────────────────────────
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\captionsetup{font=small, labelfont=bf}
+\usepackage{enumitem}
+\usepackage{parskip}
+
+%───────────────────────────────────────────────────────────
+%  Encabezados, secciones, cajas, hipervínculos, TikZ
+%───────────────────────────────────────────────────────────
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{tikz}
+\usepackage{hyperref}
+
+%───────────────────────────────────────────────────────────
+%  Paleta editorial UAM-A (sin cambio respecto al sistema
+%  vigente — ver ~/.claude/CLAUDE.md). `hairline` es un tinte
+%  de uamgray para filetes casi imperceptibles, no un color
+%  nuevo: sigue la regla de un solo acento (uamred).
+%───────────────────────────────────────────────────────────
+\definecolor{uamred}{RGB}{205,3,46}
+\definecolor{uamlightred}{RGB}{249,230,234}
+\definecolor{uamblue}{RGB}{28,28,28}
+\definecolor{uamgray}{RGB}{100,100,100}
+\definecolor{okgreen}{RGB}{56,142,60}
+\definecolor{hairline}{RGB}{222,222,222}
+
+\arrayrulecolor{uamgray} % todas las reglas estructurales (booktabs incl.) en gris — el rojo se reserva al dato
+
+%═════════════════════════════════════════════════════════
+%  SISTEMA DE ENCABEZADOS DE SECCIÓN
+%  "Cédula de sección" — el número como objeto específico
+%  (Judd), densidad de rojo decreciente como índice de nivel
+%  jerárquico (chip sólido → marca → nada).
+%═════════════════════════════════════════════════════════
+
+% Nivel 1 — chip: número en caja sólida uamred, cifras en
+% versión "tabular" cuando la fuente lo permite.
+\newtcbox{\seccionchip}{on line, arc=0pt, outer arc=0pt,
+  colback=uamred, colframe=uamred,
+  boxsep=0pt, left=4pt, right=4pt, top=3pt, bottom=3pt,
+  fontupper=\bfseries\color{white}\large}
+
+\titleformat{\section}
+  {\bfseries\Large\color{uamblue}}
+  {\seccionchip{\thesection}}
+  {0.7em}
+  {\addfontfeature{LetterSpace=40}\MakeUppercase}
+  [\vspace{3pt}{\color{hairline}\hrule height 0.5pt}\vspace{8pt}]
+\titlespacing*{\section}{0pt}{4.5ex plus 1ex minus .5ex}{1.5ex}
+
+% Nivel 2 — marca: filete rojo corto, sin caja. Retiene el
+% acento pero renuncia al volumen del chip: la disminución de
+% "masa roja" es, en sí misma, la señal de jerarquía.
+\newcommand{\subseccionmarca}{\raisebox{0.12em}{\color{uamred}\rule{4mm}{1.6pt}}}
+\titleformat{\subsection}
+  {\bfseries\normalsize\color{uamblue}}
+  {\subseccionmarca}
+  {0.6em}
+  {}
+\titlespacing*{\subsection}{0pt}{3ex plus .5ex}{0.8ex}
+
+% Nivel 3 — susurro: sin color, solo cursiva gris. El rojo ha
+% desaparecido por completo; la jerarquía se sostiene solo con
+% peso e itálica (Dieter Rams: no simular más estructura de la
+% que el contenido tiene).
+\titleformat{\subsubsection}
+  {\itshape\normalsize\color{uamgray}}
+  {}
+  {0em}
+  {}
+\titlespacing*{\subsubsection}{0pt}{2ex plus .3ex}{0.5ex}
+
+%───────────────────────────────────────────────────────────
+%  Cabecera y pie — la "columna vertebral" del documento repite
+%  a escala mínima el mismo motivo (número en rojo + título en
+%  gris) que abre cada sección, así el lector siempre sabe en
+%  qué sección está sin tener que regresar a buscar el chip.
+%───────────────────────────────────────────────────────────
+% El número y el título deben congelarse JUNTOS en una sola marca: si se
+% arma \thesection (valor en vivo del contador) por un lado y \rightmark
+% (basado en marcas, resuelto por página) por otro, ambos pueden quedar
+% desincronizados en cuanto dos secciones abren en la misma página --- el
+% encabezado muestra el número de la última sección de la página junto
+% con el título de la primera. \sectionmark congela aquí ambos datos como
+% una sola unidad atómica, así nunca pueden separarse.
+\renewcommand{\sectionmark}[1]{%
+  \markright{\textcolor{uamred}{\thesection}\quad\textcolor{uamgray}{#1}}}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\footnotesize\color{uamgray}\MakeUppercase{Prototipo de identidad --- División de Ciencias Básicas e Ingeniería}}
+\fancyhead[R]{\footnotesize\bfseries\nouppercase{\rightmark}}
+\fancyfoot[C]{\footnotesize\color{uamgray}\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\headrule}{{\color{hairline}\hrule width\headwidth height\headrulewidth}}
+\setlength{\headheight}{15pt}
+
+%═════════════════════════════════════════════════════════
+%  SISTEMA DE DATOS — "cédula de dato"
+%  El número mismo es el hecho visual (Judd, "specific
+%  objects"): sin caja de fondo de color, sin sombra, sin
+%  icono — dos filetes casi imperceptibles (Agnes Martin) y
+%  cifras grandes en Helvetica Neue Bold. El rojo se reserva
+%  para UN solo dato por composición: el hallazgo que sostiene
+%  la sección. Todo lo demás vive en uamblue/uamgray.
+%═════════════════════════════════════════════════════════
+
+\newcommand{\dato}[3][uamblue]{%
+  \begin{minipage}[t]{\linewidth}
+    \centering
+    {\color{#1}\bfseries\fontsize{27}{27}\selectfont #2}\par
+    \vspace{4pt}
+    {\color{uamgray}\footnotesize\addfontfeature{LetterSpace=30}\MakeUppercase{#3}}\par
+  \end{minipage}%
+}
+
+% Variante para rangos o cifras de más de 4 caracteres ("376--419",
+% "18--21"): mismo tratamiento, escala reducida. El numeral es un
+% "objeto específico" (Judd) --- partirlo en dos líneas por falta de
+% espacio lo convierte en un accidente tipográfico, no en un hecho
+% visual deliberado. Regla del sistema: cifras cortas (1--3 caracteres)
+% usan \protect\dato; rangos o cifras más largas usan \protect\datorango
+% para no arriesgar el salto de línea dentro del numeral.
+\newcommand{\datorango}[3][uamblue]{%
+  \begin{minipage}[t]{\linewidth}
+    \centering
+    {\color{#1}\bfseries\fontsize{18}{20}\selectfont #2}\par
+    \vspace{6pt}
+    {\color{uamgray}\footnotesize\addfontfeature{LetterSpace=30}\MakeUppercase{#3}}\par
+  \end{minipage}%
+}
+
+% columna de separación: un filete vertical casi imperceptible,
+% no una línea de tabla convencional.
+\newcolumntype{H}{!{\color{hairline}\vrule width 0.5pt}}
+
+\newenvironment{datorow}{%
+  \par\noindent{\color{hairline}\hrule height 0.5pt}\par\vspace{7pt}
+}{%
+  \par\vspace{5pt}{\color{hairline}\hrule height 0.5pt}\par\vspace{4pt}
+}
+
+%───────────────────────────────────────────────────────────
+%  Metadatos e hipervínculos
+%───────────────────────────────────────────────────────────
+\hypersetup{
+  pdftitle={Prototipo de identidad de reporte UAM-A --- v2},
+  pdfauthor={Dr. Cesar Simon Lopez-Monsalvo, UAM-Azcapotzalco},
+  colorlinks=true, linkcolor=uamblue, urlcolor=uamred}
+
+%═════════════════════════════════════════════════════════
+\begin{document}
+%═════════════════════════════════════════════════════════
+
+%───────────────────────────────────────────────────────────
+%  Cabecera de portada mínima (no es una portada completa —
+%  el demo se concentra en el cuerpo del reporte)
+%───────────────────────────────────────────────────────────
+\thispagestyle{empty}
+\begin{minipage}[t]{0.5\linewidth}
+  \includegraphics[width=0.86\linewidth]{/Users/nowhere/Claude_Projects/Personal/IdentidadGrafica/assets/tikz/logo_uam_reconstruido.pdf}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.46\linewidth}
+  \raggedleft\footnotesize\color{uamgray}
+  Universidad Autónoma Metropolitana \textperiodcentered\ Unidad Azcapotzalco\\
+  División de Ciencias Básicas e Ingeniería\\[0.2em]
+  \textit{Prototipo de identidad --- reporte técnico} \quad v2
+\end{minipage}
+
+\vspace{0.5em}
+{\color{uamred}\rule{\linewidth}{1pt}}\par\vspace{0.2em}
+{\fontsize{20}{24}\selectfont\bfseries\color{uamblue}
+  Nueva identidad de secciones y datos para reportes UAM-A}\par\vspace{0.15em}
+{\small\color{uamgray}\itshape
+  Documento de revisión --- no aplicado todavía a ningún reporte en producción}\par\vspace{0.2em}
+{\color{uamred}\rule{\linewidth}{0.5pt}}\par
+\vspace{1.2em}
+
+%══════════════════════════════════════════════════════
+\section{Resultados: eficiencia terminal}
+%══════════════════════════════════════════════════════
+
+El currículo 2020 fue diseñado para un estudiante que inscribe una carga
+de 40--45~créditos por trimestre. La población real ha inscrito
+históricamente 27--33~créditos por trimestre. Esa brecha es la causa
+estructural primaria del retraso en el egreso, antes de considerar una
+sola cadena de seriación.
+
+\begin{datorow}
+\begin{tabularx}{\linewidth}{X H X H X}
+  \dato{6\,562}{Estudiantes activos, cohorte 2020--2021} &
+  \dato{28.5\,\%} {Eficiencia terminal observada, plazo extendido} &
+  \dato[uamred]{0.000\,\%}{ET(12) --- modelo Monte Carlo calibrado}
+\end{tabularx}
+\end{datorow}
+
+El único dato en rojo es, deliberadamente, el único que sostiene el
+hallazgo central de la sección: bajo condiciones históricas de carga, el
+egreso al plazo de 12~trimestres es estadísticamente nulo en los diez
+programas. Los otros dos números son contexto necesario, no el hallazgo
+—de ahí que permanezcan en \textcolor{uamblue}{uamblue}, sin competir por
+atención.
+
+\subsection{Ancla histórica: egresos en el plazo establecido}
+
+El modelo no utiliza este valor como ancla de calibración; lo compara
+como verificación independiente. Los dos intervalos de confianza no se
+solapan, lo que aísla con precisión la heterogeneidad individual de
+carga no capturada por el modelo.
+
+\begin{table}[H]\centering
+\caption{Egresos en el plazo establecido de 12~trimestres (fuente:
+  cohortes 2020--2021, verificación independiente)}
+\label{tab:demo-historico}
+\small
+\begin{tabular}{lccc}
+\toprule
+{\bfseries\color{uamblue}\addfontfeature{LetterSpace=30}Cohorte} &
+{\bfseries\color{uamblue}\addfontfeature{LetterSpace=30}Ingreso} &
+{\bfseries\color{uamblue}\addfontfeature{LetterSpace=10}Egresados ($t\leq12$)} &
+{\bfseries\color{uamblue}{\addfontfeature{LetterSpace=20}ET}(12)} \\
+\midrule
+2020 & 1\,446 & 42 & 2.9\,\% \\
+2021 & 1\,446 & \phantom{0}2 & 0.14\,\% \\
+\midrule
+\textit{Pooled} & 2\,892 & 44 & \textbf{\textcolor{uamred}{1.52\,\%}} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsubsection{Nota metodológica}
+
+\textit{El intervalo de confianza reportado es el exacto de
+Clopper--Pearson al 95\,\%. El modelo Monte Carlo usa $S=20\,000$
+trayectorias por plan bajo parámetros centrales de calibración.}
+
+%══════════════════════════════════════════════════════
+\section{Contexto y datos de anclaje}
+%══════════════════════════════════════════════════════
+
+Antes de introducir el modelo topológico-estocástico, el reporte fija
+cuatro cantidades de referencia, ninguna de las cuales es, por sí sola,
+el hallazgo central de este documento --- de ahí que las cuatro
+compartan el mismo tratamiento cromático neutro.
+
+\subsection{Cuatro anclas de referencia}
+
+\begin{datorow}
+\begin{tabularx}{\linewidth}{X H X H X H X}
+  \datorango{376--419}{Créditos obligatorios por plan} &
+  \datorango{18--21}{Trimestres requeridos a carga histórica} &
+  \dato{9}{Profundidad topológica máxima (niveles)} &
+  \dato{10}{Programas de ingeniería analizados}
+\end{tabularx}
+\end{datorow}
+
+\subsubsection{Por qué ninguno de los cuatro lleva acento}
+
+\textit{Cada cantidad es un dato de anclaje --- describe el sistema, no
+un resultado del análisis. Reservar el rojo para estos cuatro números
+diluiría la señal que el lector debe llevarse de la sección~1.}
+
+%══════════════════════════════════════════════════════
+\section{Conclusiones preliminares}
+%══════════════════════════════════════════════════════
+
+El tercer encabezado de sección de esta página demuestra que el
+sistema --- chip sólido, filete casi imperceptible, marca de subsección
+decreciente en masa de rojo --- se reproduce sin variación de una
+sección a otra, tal como exige un sistema de diseño (Sol LeWitt: la
+regla generativa, no la ejecución aislada, es la pieza).
+
+\subsection{Siguiente paso}
+
+Este documento es un prototipo aislado. Ningún archivo de
+\texttt{06\_reporte\_v2.tex} ni de ninguna otra plantilla en producción
+fue modificado para producirlo.
+
+\end{document}

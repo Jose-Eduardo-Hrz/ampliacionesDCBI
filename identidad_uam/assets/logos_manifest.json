@@ -1,0 +1,231 @@
+[
+  {
+    "categoria": "emblema_solo",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": null,
+    "numeral": "1.1",
+    "pagina": 7,
+    "nombre": "emblema_base",
+    "archivo": "assets/logos/emblema_base.png",
+    "dimensiones_px": [
+      1961,
+      811
+    ]
+  },
+  {
+    "categoria": "conjunto_completo",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": null,
+    "numeral": "2.2",
+    "pagina": 14,
+    "nombre": "conjunto_base_negro",
+    "archivo": "assets/logos/conjunto_base_negro.png",
+    "dimensiones_px": [
+      1967,
+      418
+    ]
+  },
+  {
+    "categoria": "conjunto_completo",
+    "modo": "positivo",
+    "color": "un_color_solido (rojo, ejemplo)",
+    "unidad": null,
+    "numeral": "2.3",
+    "pagina": 15,
+    "nombre": "conjunto_color_rojo",
+    "archivo": "assets/logos/conjunto_color_rojo.png",
+    "dimensiones_px": [
+      1962,
+      404
+    ]
+  },
+  {
+    "categoria": "conjunto_completo",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": null,
+    "numeral": "2.4",
+    "pagina": 16,
+    "nombre": "conjunto_positivo",
+    "archivo": "assets/logos/conjunto_positivo.png",
+    "dimensiones_px": [
+      1961,
+      539
+    ]
+  },
+  {
+    "categoria": "conjunto_completo",
+    "modo": "negativo",
+    "color": "negro (invertido a blanco sobre fondo negro)",
+    "unidad": null,
+    "numeral": "2.4",
+    "pagina": 16,
+    "nombre": "conjunto_negativo",
+    "archivo": "assets/logos/conjunto_negativo.png",
+    "dimensiones_px": [
+      1961,
+      566
+    ]
+  },
+  {
+    "categoria": "variacion_1 (emblema+lema)",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": null,
+    "numeral": "2.7",
+    "pagina": 19,
+    "nombre": "variacion1_positivo",
+    "archivo": "assets/logos/variacion1_positivo.png",
+    "dimensiones_px": [
+      962,
+      472
+    ]
+  },
+  {
+    "categoria": "variacion_1 (emblema+lema)",
+    "modo": "negativo",
+    "color": "negro (invertido)",
+    "unidad": null,
+    "numeral": "2.7",
+    "pagina": 19,
+    "nombre": "variacion1_negativo",
+    "archivo": "assets/logos/variacion1_negativo.png",
+    "dimensiones_px": [
+      562,
+      460
+    ]
+  },
+  {
+    "categoria": "variacion_2 (solo emblema)",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": null,
+    "numeral": "2.7",
+    "pagina": 20,
+    "nombre": "variacion2_positivo",
+    "archivo": "assets/logos/variacion2_positivo.png",
+    "dimensiones_px": [
+      962,
+      397
+    ]
+  },
+  {
+    "categoria": "variacion_2 (solo emblema)",
+    "modo": "negativo",
+    "color": "negro (invertido)",
+    "unidad": null,
+    "numeral": "2.7",
+    "pagina": 20,
+    "nombre": "variacion2_negativo",
+    "archivo": "assets/logos/variacion2_negativo.png",
+    "dimensiones_px": [
+      597,
+      356
+    ]
+  },
+  {
+    "categoria": "variacion_3 (conjunto + Unidad, apilado)",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": "Xochimilco",
+    "numeral": "5.2",
+    "pagina": 47,
+    "nombre": "unidad_xochimilco",
+    "archivo": "assets/logos/unidad_xochimilco.png",
+    "dimensiones_px": [
+      1558,
+      425
+    ]
+  },
+  {
+    "categoria": "variacion_5 (conjunto + Unidad, apilado compacto)",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": "Lerma",
+    "numeral": "5.2",
+    "pagina": 47,
+    "nombre": "unidad_lerma",
+    "archivo": "assets/logos/unidad_lerma.png",
+    "dimensiones_px": [
+      670,
+      601
+    ]
+  },
+  {
+    "categoria": "variacion_6 (conjunto + Unidad, lateral con filete)",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": "Cuajimalpa",
+    "numeral": "5.2",
+    "pagina": 48,
+    "nombre": "unidad_cuajimalpa",
+    "archivo": "assets/logos/unidad_cuajimalpa.png",
+    "dimensiones_px": [
+      1342,
+      413
+    ]
+  },
+  {
+    "categoria": "variacion_7 (conjunto + Unidad, arco tipográfico)",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": "Azcapotzalco",
+    "numeral": "5.2",
+    "pagina": 48,
+    "nombre": "unidad_azcapotzalco",
+    "archivo": "assets/logos/unidad_azcapotzalco.png",
+    "dimensiones_px": [
+      845,
+      592
+    ]
+  },
+  {
+    "nombre": "logo_UAM_oficial",
+    "archivo": "assets/logos/logo_UAM_oficial.png",
+    "categoria": "conjunto + Unidad Azcapotzalco (logo oficial en uso en los documentos generados)",
+    "modo": "positivo",
+    "color": "negro + rojo (\"Azcapotzalco\" en rojo)",
+    "unidad": "Azcapotzalco",
+    "numeral": null,
+    "pagina": null,
+    "fuente": "oficial, provisto directamente — no extraído de contexto/reglas-completo.pdf",
+    "dimensiones_px": [
+      3642,
+      854
+    ]
+  },
+  {
+    "nombre": "logo_oficial_extenso",
+    "archivo": "assets/logos/logo_oficial_extenso.png",
+    "categoria": "conjunto base (emblema+lema+denominación), apilado — referencia autoritativa de tamaño/espaciado para el lema",
+    "modo": "positivo",
+    "color": "negro",
+    "unidad": null,
+    "numeral": null,
+    "pagina": null,
+    "fuente": "oficial, provisto directamente por César — no extraído de contexto/reglas-completo.pdf",
+    "nota": "Usado en scripts/generar_lockup.py como fuente de las razones de tamaño/espaciado del lema y la denominación (medidas por análisis de píxeles: emblema 163px, lema 37px, denominación 60px, ambas separaciones 18px) — más confiable que los diagramas de construcción del manual (p. 13/14), cuya razón lema:denominación de 1:3.3 este mismo conjunto oficial no sigue en la práctica (aquí es ~1:1.62).",
+    "dimensiones_px": [
+      1550,
+      405
+    ]
+  },
+  {
+    "nombre": "logo_uam_oficial_reconstruido",
+    "archivo": "assets/logos/logo_uam_oficial_reconstruido.png",
+    "categoria": "LOGO OFICIAL RECOMENDADO — conjunto base vectorial (emblema+lema+denominación+Unidad Azcapotzalco), generado, no extraído ni provisto",
+    "modo": "positivo",
+    "color": "negro + rojo (\"Azcapotzalco\")",
+    "unidad": "Azcapotzalco",
+    "numeral": null,
+    "pagina": null,
+    "fuente": "generado por scripts/generar_lockup.py: emblema trazado con potrace desde emblema_base.png + texto en Helvetica Neue Condensed Bold real (fontspec), con tamaño y espaciado del lema/denominación medidos sobre logo_oficial_extenso.png. Fuente vectorial en assets/tikz/logo_uam_reconstruido.{tex,pdf} — este PNG es solo un render de referencia rápida.",
+    "nota": "Designado por César (2026-07) como el logo oficial a usar en documentos nuevos, en vez de logo_UAM_oficial.png (que no sigue la tipografía Helvetica Neue Condensed Bold exigida por el manual §1.2/§1.3 ni la proporción lema:denominación real de logo_oficial_extenso.png). Vinculado al skill /identidad-uam y al agente design-identity — ver sus respectivos archivos de definición.",
+    "dimensiones_px": [
+      4063,
+      1126
+    ]
+  }
+]

@@ -1,0 +1,6 @@
+networkx
+numpy
+scikit-learn
+nltk
+sentence-transformers
+pillow

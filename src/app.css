@@ -1,0 +1,153 @@
+/*
+ * Identidad visual institucional UAM (ver identidad_uam/README.md):
+ * - Tipografia web obligatoria: Verdana, con alternativas Arial y Tahoma
+ *   (numeral 4.1 / Anexo II del manual).
+ * - Color de Unidad Azcapotzalco: Pantone 186C / #CD032E (numeral 5.3).
+ * - Negro institucional del conjunto base: #000000 (numeral 2.3).
+ * Los colores de estado (badge-*) y de error/exito NO son parte de la
+ * paleta institucional: son convenciones de UI para retroalimentacion,
+ * elegidas para no competir visualmente con el rojo institucional.
+ */
+:root {
+	--color-uam-negro: #000000;
+	--color-uam-azcapotzalco: #cd032e;
+	--color-texto: #1a1a1a;
+	--color-texto-claro: #595959;
+	--color-fondo: #ffffff;
+	--color-fondo-alterno: #f7f7f7;
+	--color-borde: #cccccc;
+
+	--color-error-fondo: #fdecea;
+	--color-error-borde: #e0a5a0;
+	--color-error-texto: #7a1c1c;
+
+	--color-exito-fondo: #eaf6ec;
+	--color-exito-borde: #a8d5b0;
+	--color-exito-texto: #1e5c2a;
+
+	--fuente-institucional: Verdana, Arial, Tahoma, sans-serif;
+
+	--espacio-1: 0.25rem;
+	--espacio-2: 0.5rem;
+	--espacio-3: 1rem;
+	--espacio-4: 1.5rem;
+	--espacio-5: 2.5rem;
+
+	--radio-borde: 4px;
+	--ancho-contenido: 65rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: var(--fuente-institucional);
+	color: var(--color-texto);
+	background: var(--color-fondo-alterno);
+	line-height: 1.5;
+}
+
+main {
+	max-width: var(--ancho-contenido);
+	margin-inline: auto;
+	padding: var(--espacio-4) var(--espacio-3) var(--espacio-5);
+	background: var(--color-fondo);
+	min-height: 100vh;
+}
+
+h1 {
+	font-size: 1.5rem;
+	margin-block: var(--espacio-4) var(--espacio-3);
+}
+
+h2 {
+	font-size: 1.15rem;
+	margin-block: var(--espacio-4) var(--espacio-2);
+}
+
+p {
+	color: var(--color-texto);
+}
+
+a {
+	color: var(--color-uam-azcapotzalco);
+}
+
+label {
+	display: block;
+	font-weight: bold;
+	margin-block: var(--espacio-3) var(--espacio-1);
+}
+
+input {
+	font-family: inherit;
+	font-size: 1rem;
+	width: 100%;
+	padding: var(--espacio-2);
+	border: 1px solid var(--color-borde);
+	border-radius: var(--radio-borde);
+	background: var(--color-fondo);
+	color: var(--color-texto);
+}
+
+input[type='file'] {
+	padding: var(--espacio-2);
+	border: 1px dashed var(--color-borde);
+	background: var(--color-fondo-alterno);
+}
+
+.campo-archivo {
+	margin-block-end: var(--espacio-3);
+}
+
+button {
+	font-family: inherit;
+}
+
+:focus-visible {
+	outline: 3px solid var(--color-uam-azcapotzalco);
+	outline-offset: 2px;
+}
+
+/* Mensaje de error de un campo individual (TextField, FileUploadPdf). */
+.error-campo {
+	color: var(--color-error-texto);
+	font-size: 0.9rem;
+	margin: var(--espacio-1) 0 0;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th,
+td {
+	border: 1px solid var(--color-borde);
+	padding: 0.5em 0.75em;
+	text-align: left;
+	vertical-align: top;
+}
+
+th {
+	background: var(--color-uam-negro);
+	color: var(--color-fondo);
+	white-space: nowrap;
+}
+
+ul {
+	margin: 0;
+	padding-left: 1.1em;
+}
+
+@media (max-width: 480px) {
+	main {
+		padding: var(--espacio-3) var(--espacio-2) var(--espacio-4);
+	}
+}
