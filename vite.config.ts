@@ -11,6 +11,9 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes('node_modules') ? undefined : true
 			},
 			adapter: adapter(),
+			csrf: {
+				checkOrigin: false, // Deshabilita la protección CSRF global (No recomendado para apps estándar)
+			},
 			paths: {
 				base: '/ampliaciones'
 			}
