@@ -23,14 +23,14 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	const proceso = verificarTokenProcesoAlumno(token);
 
 	if (!proceso) {
-		redirect(303, '/ampliaciones');
+		redirect(303, '/ampliaciones/ampliaciones');
 	}
 
 	const disponibilidad = await verificarDisponibilidadAlumno(proceso.matricula);
 
 	// Si el alumno ya no existe, el token no sirve para nada: fuera, a /.
 	if (disponibilidad.estado === 'no_existe') {
-		redirect(303, '/ampliaciones');
+		redirect(303, '/ampliaciones/ampliaciones');
 	}
 
 	// Si ya esta registrado (porque termino su registro, o porque perdio una
@@ -70,7 +70,7 @@ export const actions: Actions = {
 		const proceso = verificarTokenProcesoAlumno(token);
 
 		if (!proceso) {
-			redirect(303, '/ampliaciones');
+			redirect(303, '/ampliaciones/ampliaciones');
 		}
 
 		const formData = await request.formData();

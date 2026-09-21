@@ -11,7 +11,7 @@ export const GET: RequestHandler = async ({ locals }) => {
 	try {
 		buffer = await generarExcelInformacionActual();
 	} catch (err) {
-		const errorId = registrarErrorServidor('GET /api/administrador/excel', err);
+		const errorId = registrarErrorServidor('GET /ampliaciones/api/administrador/excel', err);
 		error(500, `No se pudo generar el archivo. Intenta de nuevo. (Referencia: ${errorId})`);
 	}
 

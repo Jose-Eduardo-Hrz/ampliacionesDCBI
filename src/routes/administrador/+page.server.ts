@@ -45,6 +45,6 @@ export const actions: Actions = {
 
 		registrarIntentoExitoso(numeroEconomico);
 		cookies.set(NOMBRE_COOKIE_SESION, login.token, opcionesCookieSesion);
-		redirect(303, 'ampliaciones/administrador/datos');
+		redirect(303, '/ampliaciones/administrador/datos');
 	}
 };

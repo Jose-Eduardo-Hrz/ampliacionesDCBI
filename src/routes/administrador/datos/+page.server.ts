@@ -5,7 +5,7 @@ import { obtenerAlumnosConAmpliaciones } from '$lib/server/repositories/alumno';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.administrador) {
-		redirect(303, '/administrador');
+		redirect(303, '/ampliaciones/administrador');
 	}
 
 	const alumnos = await obtenerAlumnosConAmpliaciones();
@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions: Actions = {
 	cerrarSesion: async ({ cookies }) => {
-		cookies.delete(NOMBRE_COOKIE_SESION, { path: '/' });
-		redirect(303, '/administrador');
+		cookies.delete(NOMBRE_COOKIE_SESION, { path: '/ampliaciones' });
+		redirect(303, '/ampliaciones/administrador');
 	}
 };

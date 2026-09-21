@@ -31,7 +31,7 @@ function formatearHora(fecha: Date): string {
 // autenticacion).
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.administrador) {
-		redirect(303, '/administrador');
+		redirect(303, '/ampliaciones/administrador');
 	}
 
 	const configuracion = await obtenerConfiguracionRegistro();
@@ -62,7 +62,7 @@ export const actions: Actions = {
 		try {
 			await guardarConfiguracionRegistro(resultado.data);
 		} catch (error) {
-			const errorId = registrarErrorServidor('POST /administrador/configuracion', error);
+			const errorId = registrarErrorServidor('POST /ampliaciones/administrador/configuracion', error);
 			return fail(500, {
 				error: `Ocurrió un error al guardar la configuración. Intenta de nuevo. (Referencia: ${errorId})`
 			});

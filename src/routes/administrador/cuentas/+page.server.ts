@@ -7,7 +7,7 @@ import { crearCuentaAdministrador } from '$lib/server/auth/crearAdministrador';
 // fuera a /administrador.
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.administrador) {
-		redirect(303, '/administrador');
+		redirect(303, '/ampliaciones/administrador');
 	}
 
 	return { administrador: locals.administrador };

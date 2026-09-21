@@ -9,7 +9,7 @@ import { registrarErrorServidor } from '$lib/server/logging';
 // sesion resuelto en hooks.server.ts, sin un segundo sistema de autenticacion.
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.administrador) {
-		redirect(303, '/administrador');
+		redirect(303, '/ampliaciones/administrador');
 	}
 
 	return { administrador: locals.administrador };
@@ -37,7 +37,7 @@ export const actions: Actions = {
 
 			return { seccion: 'alumnos' as const, success: true as const, resumen: resultado.resumen };
 		} catch (error) {
-			const errorId = registrarErrorServidor('POST /administrador/registro (alumnos)', error);
+			const errorId = registrarErrorServidor('POST /ampliaciones/administrador/registro (alumnos)', error);
 			return fail(500, {
 				seccion: 'alumnos' as const,
 				error: `Ocurrió un error al procesar el archivo. Intenta de nuevo. (Referencia: ${errorId})`
@@ -66,7 +66,7 @@ export const actions: Actions = {
 
 			return { seccion: 'horarios' as const, success: true as const, resumen: resultado.resumen };
 		} catch (error) {
-			const errorId = registrarErrorServidor('POST /administrador/registro (horarios)', error);
+			const errorId = registrarErrorServidor('POST /ampliaciones/administrador/registro (horarios)', error);
 			return fail(500, {
 				seccion: 'horarios' as const,
 				error: `Ocurrió un error al procesar el archivo. Intenta de nuevo. (Referencia: ${errorId})`
