@@ -12,7 +12,8 @@ export default defineConfig({
 			},
 			adapter: adapter(),
 			csrf: {
-				checkOrigin: false, // Deshabilita la protección CSRF global (No recomendado para apps estándar)
+				// Reemplaza checkOrigin por trustedOrigins e incluye tu IP
+				trustedOrigins: ['http://148.206.94.10:3020', 'http://localhost:3020']
 			},
 			paths: {
 				base: '/ampliaciones'
