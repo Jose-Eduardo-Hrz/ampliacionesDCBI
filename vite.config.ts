@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import adapter from '@sveltejs/adapter-node';
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vitest/config';
@@ -12,8 +13,13 @@ export default defineConfig({
 			},
 			adapter: adapter(),
 			csrf: {
-				// Reemplaza checkOrigin por trustedOrigins e incluye tu IP
-				trustedOrigins: ['http://192.168.100.24/:3000', 'http://localhost:3000']
+				// Misma variable ORIGIN que ya usa @sveltejs/adapter-node para su
+				// propio origen (ver .env.example): una sola fuente de verdad para
+				// la URL real de despliegue, sin IPs sueltas en el codigo fuente.
+				// OJO: a diferencia de adapter-node (que lee ORIGIN en cada arranque
+				// del servidor), esto se incrusta en el build: si cambia ORIGIN hay
+				// que correr `pnpm run build` de nuevo, no solo reiniciar el proceso.
+				trustedOrigins: process.env.ORIGIN ? [process.env.ORIGIN] : []
 			},
 			paths: {
 				base: '/ampliaciones'
