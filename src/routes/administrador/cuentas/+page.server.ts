@@ -2,12 +2,13 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { crearAdministradorSchema } from '$lib/validation/administrador';
 import { crearCuentaAdministrador } from '$lib/server/auth/crearAdministrador';
+import { resolve } from '$app/paths';
 
 // Protegida igual que /administrador/datos: sin sesion de administrador,
 // fuera a /administrador.
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.administrador) {
-		redirect(303, '/ampliaciones/administrador');
+		redirect(303, resolve('/administrador'));
 	}
 
 	return { administrador: locals.administrador };

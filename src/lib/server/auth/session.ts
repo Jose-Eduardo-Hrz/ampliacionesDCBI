@@ -1,4 +1,4 @@
-import { SESSION_MAX_AGE_SEGUNDOS } from '$lib/server/config';
+import { SESSION_MAX_AGE_SEGUNDOS, COOKIE_SECURE } from '$lib/server/config';
 import { crearTokenFirmado, verificarTokenFirmado } from './token';
 
 export const NOMBRE_COOKIE_SESION = 'admin_session';
@@ -31,6 +31,6 @@ export const opcionesCookieSesion = {
 	path: '/',
 	httpOnly: true,
 	sameSite: 'lax' as const,
-	secure: import.meta.env.PROD,
+	secure: COOKIE_SECURE,
 	maxAge: SESSION_MAX_AGE_SEGUNDOS
 };

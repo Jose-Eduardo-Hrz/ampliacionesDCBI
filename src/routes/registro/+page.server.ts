@@ -1,4 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { resolve } from '$app/paths';
 import type { Actions, PageServerLoad } from './$types';
 import {
 	NOMBRE_COOKIE_PROCESO_ALUMNO,
@@ -23,14 +24,14 @@ export const load: PageServerLoad = async ({ cookies }) => {
 	const proceso = verificarTokenProcesoAlumno(token);
 
 	if (!proceso) {
-		redirect(303, '/ampliaciones/ampliaciones');
+		redirect(303, resolve('/'));
 	}
 
 	const disponibilidad = await verificarDisponibilidadAlumno(proceso.matricula);
 
 	// Si el alumno ya no existe, el token no sirve para nada: fuera, a /.
 	if (disponibilidad.estado === 'no_existe') {
-		redirect(303, '/ampliaciones/ampliaciones');
+		redirect(303, resolve('/'));
 	}
 
 	// Si ya esta registrado (porque termino su registro, o porque perdio una
@@ -70,11 +71,10 @@ export const actions: Actions = {
 		const proceso = verificarTokenProcesoAlumno(token);
 
 		if (!proceso) {
-			redirect(303, '/ampliaciones/ampliaciones');
+			redirect(303, resolve('/'));
 		}
 
 		const formData = await request.formData();
-
 
 		let resultado;
 		try {
@@ -88,7 +88,7 @@ export const actions: Actions = {
 			});
 		} catch (error) {
 			const errorId = registrarErrorServidor(
-				`POST /ampliaciones/registro (matricula=${proceso.matricula})`,
+				`POST /registro (matricula=${proceso.matricula})`,
 				error
 			);
 			return fail(500, {
@@ -100,7 +100,7 @@ export const actions: Actions = {
 			return fail(400, { error: resultado.mensaje, campo: resultado.campo });
 		}
 
-		cookies.delete(NOMBRE_COOKIE_PROCESO_ALUMNO, { path: '/ampliaciones' });
-		redirect(303, '/ampliaciones/registro/exito');
+		cookies.delete(NOMBRE_COOKIE_PROCESO_ALUMNO, { path: '/' });
+		redirect(303, resolve('/registro/exito'));
 	}
 };

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { resolve } from '$app/paths';
 	import Header from '$lib/components/Header.svelte';
 	import TextField from '$lib/components/TextField.svelte';
 	import Button from '$lib/components/Button.svelte';
@@ -23,6 +24,7 @@
 
 	<form
 		method="POST"
+		action={resolve('/administrador')}
 		use:enhance={() => {
 			enviando = true;
 			return async ({ update }) => {

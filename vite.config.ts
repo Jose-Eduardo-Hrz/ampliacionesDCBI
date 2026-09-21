@@ -13,7 +13,7 @@ export default defineConfig({
 			adapter: adapter(),
 			csrf: {
 				// Reemplaza checkOrigin por trustedOrigins e incluye tu IP
-				trustedOrigins: ['http://148.206.94.10:3020', 'http://localhost:3020']
+				trustedOrigins: ['http://192.168.100.24/:3000', 'http://localhost:3000']
 			},
 			paths: {
 				base: '/ampliaciones'

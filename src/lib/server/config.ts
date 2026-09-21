@@ -37,3 +37,23 @@ export const SESSION_SECRET = resolverSessionSecret();
 
 /** Duracion de una sesion de administrador. */
 export const SESSION_MAX_AGE_SEGUNDOS = 8 * 60 * 60; // 8 horas
+
+/**
+ * Si las cookies de sesion deben marcarse Secure (solo se guardan/envian por
+ * HTTPS). "Produccion" no implica HTTPS: este despliegue puede correr en
+ * produccion sobre HTTP plano (p. ej. por IP, sin certificado). ORIGIN ya es
+ * obligatoria en produccion para la proteccion CSRF de adapter-node (ver
+ * .env.example); su protocolo es la unica fuente de verdad de si el sitio
+ * realmente se sirve por HTTPS, asi que se reutiliza aqui en vez de agregar
+ * una variable de entorno nueva. Sin ORIGIN definida (desarrollo, o una
+ * produccion mal configurada) se usa el valor anterior (import.meta.env.PROD)
+ * como respaldo.
+ */
+function resolverCookieSecure(): boolean {
+	if (env.ORIGIN) {
+		return env.ORIGIN.startsWith('https://');
+	}
+	return import.meta.env.PROD;
+}
+
+export const COOKIE_SECURE = resolverCookieSecure();

@@ -1,4 +1,5 @@
 import { crearTokenFirmado, verificarTokenFirmado } from './token';
+import { COOKIE_SECURE } from '$lib/server/config';
 
 export const NOMBRE_COOKIE_PROCESO_ALUMNO = 'alumno_proceso';
 
@@ -41,6 +42,6 @@ export const opcionesCookieProcesoAlumno = {
 	path: '/',
 	httpOnly: true,
 	sameSite: 'lax' as const,
-	secure: import.meta.env.PROD,
+	secure: COOKIE_SECURE,
 	maxAge: PROCESO_MAX_AGE_SEGUNDOS
 };

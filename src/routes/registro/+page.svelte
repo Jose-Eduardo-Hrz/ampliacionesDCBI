@@ -84,6 +84,7 @@
 
 		<form
 			method="POST"
+			action={resolve('/registro')}
 			enctype="multipart/form-data"
 			use:enhance={({ cancel }) => {
 				if (!validarAntesDeEnviar()) {

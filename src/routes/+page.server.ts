@@ -1,4 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { resolve } from '$app/paths';
 import type { Actions, PageServerLoad } from './$types';
 import { evaluarIngresoAlumno } from '$lib/server/flujo/ingresoAlumno';
 import { registroEstaAbierto } from '$lib/server/flujo/periodoRegistro';
@@ -40,6 +41,6 @@ export const actions: Actions = {
 		}
 
 		cookies.set(NOMBRE_COOKIE_PROCESO_ALUMNO, resultado.token, opcionesCookieProcesoAlumno);
-		redirect(303, '/ampliaciones/registro');
+		redirect(303, resolve('/registro'));
 	}
 };

@@ -44,6 +44,7 @@
 
 	<form
 		method="POST"
+		action={resolve('/administrador/configuracion')}
 		use:enhance={() => {
 			enviando = true;
 			return async ({ update }) => {

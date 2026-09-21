@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { resolve } from '$app/paths';
 	import { matriculaSchema } from '$lib/validation/matricula';
 	import Header from '$lib/components/Header.svelte';
 	import TextField from '$lib/components/TextField.svelte';
@@ -52,6 +53,7 @@
 	{#if data.registroAbierto}
 		<form
 			method="POST"
+			action={resolve('/')}
 			use:enhance={({ cancel }) => {
 				if (!validarLocal()) {
 					cancel();

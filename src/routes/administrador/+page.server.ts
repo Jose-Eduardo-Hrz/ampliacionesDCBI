@@ -1,4 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { resolve } from '$app/paths';
 import type { Actions, PageServerLoad } from './$types';
 import { loginAdministradorSchema } from '$lib/validation/administrador';
 import { iniciarSesionAdministrador } from '$lib/server/auth/login';
@@ -11,12 +12,13 @@ import {
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (locals.administrador) {
-		redirect(303, '/ampliaciones/administrador/datos');
+		redirect(303, resolve('/administrador/datos'));
 	}
 };
 
 export const actions: Actions = {
 	default: async ({ request, cookies }) => {
+		console.log('Accediendo a /administrador con metodo POST');
 		const datos = Object.fromEntries(await request.formData());
 		const resultado = loginAdministradorSchema.safeParse(datos);
 
@@ -43,8 +45,12 @@ export const actions: Actions = {
 			return fail(401, { error: 'Usuario o contraseña incorrectos.' });
 		}
 
+		console.log(`Administrador ${numeroEconomico} ha iniciado sesion correctamente.`);
+
 		registrarIntentoExitoso(numeroEconomico);
 		cookies.set(NOMBRE_COOKIE_SESION, login.token, opcionesCookieSesion);
-		redirect(303, '/ampliaciones/administrador/datos');
+		const redirectUrl = resolve('/administrador/datos');
+		console.log(`Redirigiendo a ${redirectUrl}`);
+		redirect(303, redirectUrl);
 	}
 };

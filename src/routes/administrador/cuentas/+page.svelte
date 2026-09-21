@@ -31,6 +31,7 @@
 
 	<form
 		method="POST"
+		action={resolve('/administrador/cuentas')}
 		use:enhance={() => {
 			enviando = true;
 			return async ({ update }) => {
