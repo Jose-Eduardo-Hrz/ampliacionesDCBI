@@ -2,7 +2,7 @@
 	import type { Snippet } from 'svelte';
 
 	interface Props {
-		variant?: 'error' | 'exito';
+		variant?: 'error' | 'exito' | 'advertencia';
 		children: Snippet;
 	}
 
@@ -31,5 +31,12 @@
 		background: var(--color-exito-fondo);
 		border-color: var(--color-exito-borde);
 		color: var(--color-exito-texto);
+	}
+
+	.advertencia {
+		background: #ffe8d6;
+		border-color: #e0a86e;
+		color: #8a4b00;
+		font-weight: bold;
 	}
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	import { resolve } from '$app/paths';
+	import { asset, resolve } from '$app/paths';
 	import { SvelteSet } from 'svelte/reactivity';
 	import { correoInstitucionalSchema, telefonoSchema } from '$lib/validation/contacto';
 	import Header from '$lib/components/Header.svelte';
@@ -124,6 +124,23 @@
 				required
 			/>
 
+			<section class="leyenda-ampliacion" aria-label="Significado del estado de ampliación">
+				<h2>¿Qué significa el estado de la ampliación?</h2>
+				<dl>
+					<dt><StatusBadge estado="Autorizado" tipo="ampliacion" /></dt>
+					<dd>Puedes entrar a la UEA.</dd>
+
+					<dt><StatusBadge estado="NoAutorizado" tipo="ampliacion" /></dt>
+					<dd>No se autorizó tu entrada a la UEA.</dd>
+
+					<dt><StatusBadge estado="PasarOficinaEnlace" tipo="ampliacion" /></dt>
+					<dd>
+						Debes comunicarte al correo <a href="mailto:mgap@azc.uam.mx">mgap@azc.uam.mx</a> o acudir
+						al edificio HP, primer piso, a la Oficina de Enlace.
+					</dd>
+				</dl>
+			</section>
+
 			<h2>UEA disponibles para ampliación</h2>
 			<Table>
 				<table>
@@ -132,8 +149,8 @@
 							<th>Clave</th>
 							<th>Nombre</th>
 							<th>Grupo</th>
-							<th>Ampliación</th>
 							<th>Horario</th>
+							<th>Ampliación</th>
 							<th>Seleccionar</th>
 						</tr>
 					</thead>
@@ -173,6 +190,15 @@
 			{/if}
 
 			<h2>Documentos</h2>
+			<p>
+				<a href={asset('/solicitud.pdf')} target="_blank" rel="noopener">Descargar formato de solicitud</a>
+			</p>
+
+			<Alert variant="advertencia">
+				Si no cuentas con tu credencial de la escuela, solo se acepta la INE como identificación oficial
+				válida.
+			</Alert>
+
 			<FileUploadPdf
 				id="credencial"
 				name="credencial"
@@ -187,6 +213,10 @@
 				maxSizeMb={data.maxPdfSizeMb}
 				onchange={(archivo) => (solicitud = archivo)}
 			/>
+
+			<Alert variant="advertencia">
+				Antes de enviar la solicitud, verifica que las UEA seleccionadas sean las mismas que colocas en el formato de solicitud.
+			</Alert>
 
 			<Button type="submit" disabled={enviando}>
 				{enviando ? 'Enviando...' : 'Enviar solicitud'}
@@ -211,6 +241,33 @@
 	}
 
 	.datos-alumno dd {
+		margin: 0;
+	}
+
+	.leyenda-ampliacion {
+		background: var(--color-fondo-alterno);
+		padding: var(--espacio-3);
+		border-radius: var(--radio-borde);
+		margin-block-end: var(--espacio-3);
+	}
+
+	.leyenda-ampliacion h2 {
+		margin-block-start: 0;
+	}
+
+	.leyenda-ampliacion dl {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: var(--espacio-2) var(--espacio-3);
+		align-items: center;
+		margin: 0;
+	}
+
+	.leyenda-ampliacion dt {
+		white-space: nowrap;
+	}
+
+	.leyenda-ampliacion dd {
 		margin: 0;
 	}
 </style>
