@@ -28,6 +28,8 @@ vite.config.ts.timestamp-*
 /prisma/dev.db-journal
 /prisma/*.db
 /prisma/*.db-journal
+/prisma/*.db-wal
+/prisma/*.db-shm
 
 # Documentos subidos por alumnos (datos personales: nunca a control de versiones)
 /documentos/*
